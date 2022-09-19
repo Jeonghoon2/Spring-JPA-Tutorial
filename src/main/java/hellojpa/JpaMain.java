@@ -1,9 +1,7 @@
 package hellojpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
 
@@ -18,10 +16,26 @@ public class JpaMain {
 
         /* 정석 코드 */
         try {
-            Member member = new Member();
-            member.setId(2L);
-            member.setName("HelloB");
-            em.persist(member);
+            Member findMember = em.find(Member.class, 1L);
+
+            /* 회원 찾기*/
+//            System.out.println("findMember.id = " + findMember.getId());
+//            System.out.println("findMember.name = " + findMember.getName());
+            /* 회원 수정 */
+//            findMember.setName("HelloJPA");
+
+
+
+            /* 전체 회워 조회 */
+            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
+                    .getResultList();
+
+            for (Member member : result) {
+                System.out.println("member.name = " + member.getName());
+            }
+
 
             /* 정상적이면 Commit*/
             tx.commit();
