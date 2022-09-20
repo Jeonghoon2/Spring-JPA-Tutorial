@@ -3,7 +3,7 @@ package hellojpa;
 import javax.persistence.*;
 import java.util.List;
 
-public class JpaMain {
+public class JpaTutorial1 {
 
     public static void main(String[] args) {
         /* Lodding 시점에 딱 하나만 만들기 */
